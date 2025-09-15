@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const bankSchema = new mongoose.Schema({
-    banckCode: {
+    bankCode: {
         type: String, 
         required: true, 
         unique: true, 
