@@ -6,12 +6,13 @@ class ClientService extends BaseService {
         super(Client);
     }
 
-    async findByDocNum(docNum){
-        return await this.model.findOne({ docNum });
+    async findByDocNum(docNumber){
+        const client = await this.model.findOne({ docNumber });
+        return client;
     }
 
-    async updateClient(docNum, newData) {
-        const client = await this.model.findByDocNum(docNum);
+    async updateClient(docNumber, newData) {
+        const client = await this.model.findByDocNum(docNumber);
         if(!client) throw new Error('Client not found');
 
         client.docNum = newData.docNum;

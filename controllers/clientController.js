@@ -6,7 +6,7 @@ class ClientController {
         try{
             const client = req.body;
 
-            const existingClient = await clientService.findByDocNum(client.docNum);
+            const existingClient = await clientService.findByDocNum(client.docNumber);
             if(existingClient) return res.status(400).json({
                 message: `This cliente ${client.docNum} already exists!`
             });
@@ -29,10 +29,10 @@ class ClientController {
 
     async findById(req, res){
         try {
-            const { docNum } = req.params;
-            const client = await clientService.findByDocNum(docNum);
+            const { docNumber } = req.params;
+            const client = await clientService.findByDocNum(docNumber);
 
-            if(client) return res.status(404).json({
+            if(!client) return res.status(404).json({
                 message: `The client with ID = ${client.docNum} does not exist!`
             });
 
@@ -47,19 +47,19 @@ class ClientController {
 
     async update(req, res){
         try {
-            const { docNum } = req.params;
+            const { docNumber } = req.params;
             const client = req.body;
 
-            if(docNum !== client.docNum) return res.status(400).json({
+            if(docNumber !== client.docNumber) return res.status(400).json({
                 message: "Bank code in URL and body do not match"
             });
 
-            const clientToUpdate = await clientService.findByDocNum(docNum);
+            const clientToUpdate = await clientService.findByDocNum(docNumber);
             if(!clientToUpdate) return res.status(404).json({
-                message: `Client with ID = ${client.docNum} does not exists!`
+                message: `Client with ID = ${client.docNumber} does not exists!`
             });
 
-            await clientService.updateClient(docNum, client);
+            await clientService.updateClient(docNumber, client);
             return res.status(204).json.send();
 
         } catch (error) {
@@ -72,8 +72,8 @@ class ClientController {
 
     async deleteClient(req, res){
         try {
-            const { docNum } = req.params;
-            const clientToDelete = await clientService.findByDocNum(docNum);
+            const { docNumber } = req.params;
+            const clientToDelete = await clientService.findByDocNum(docNumber);
 
             if(!clientToDelete) return res.status(404).json({
                 message: `Cliente with the ID = ${docNum} does not exist!`
