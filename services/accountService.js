@@ -5,7 +5,7 @@ class AccountService extends BaseService {
     constructor() {
         super(Account);
     }
-
+clea
     async findByAccountNumber(accountNumber){
         return await this.model.findOne({ accountNumber })
         .populate('client bank'); //se usa este metodo populate para traer los datos de las referencias que hace a otros models

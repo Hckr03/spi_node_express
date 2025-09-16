@@ -22,4 +22,4 @@ class ClientService extends BaseService {
     }
 }
 
-model.exports = new ClientService();
+module.exports = new ClientService();
